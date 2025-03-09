@@ -328,21 +328,67 @@ document.body.appendChild(footer);
     }
 
     function enableImageSlideshow(card, img, images, defaultThumbnail) {
-        let currentIndex = 0;
-        let interval;
+    let currentIndex = 0;
+    let interval;
+    let isTouchScrolling = false; // Detect if user is scrolling
 
-        card.addEventListener("mouseenter", () => {
-            interval = setInterval(() => {
-                img.src = images[currentIndex];
-                currentIndex = (currentIndex + 1) % images.length;
-            }, 500);
-        });
+    function startSlideshow() {
+        // Stop any active slideshows before starting a new one
+        stopAllSlideshows();
 
-        card.addEventListener("mouseleave", () => {
-            clearInterval(interval);
-            img.src = defaultThumbnail;
+        interval = setInterval(() => {
+            img.src = images[currentIndex];
+            currentIndex = (currentIndex + 1) % images.length;
+        }, 500);
+
+        // Store active interval in the card element (to clear later)
+        card.dataset.slideshowActive = "true";
+        card.dataset.intervalId = interval;
+    }
+
+    function stopSlideshow() {
+        clearInterval(interval);
+        img.src = defaultThumbnail;
+        card.dataset.slideshowActive = "false";
+    }
+
+    function stopAllSlideshows() {
+        document.querySelectorAll(".video-card").forEach((otherCard) => {
+            if (otherCard.dataset.slideshowActive === "true") {
+                clearInterval(otherCard.dataset.intervalId);
+                const imgElement = otherCard.querySelector("img");
+                if (imgElement) {
+                    imgElement.src = imgElement.dataset.defaultThumbnail;
+                }
+                otherCard.dataset.slideshowActive = "false";
+            }
         });
     }
+
+    // Store the default thumbnail
+    img.dataset.defaultThumbnail = img.src;
+
+    // Mouse Events for Desktop
+    card.addEventListener("mouseenter", startSlideshow);
+    card.addEventListener("mouseleave", stopSlideshow);
+
+    // Touch Events for Mobile
+    card.addEventListener("touchstart", (event) => {
+        isTouchScrolling = false; // Reset scrolling state
+        startSlideshow();
+    });
+
+    card.addEventListener("touchmove", () => {
+        isTouchScrolling = true; // User is scrolling
+    });
+
+    card.addEventListener("touchend", () => {
+        if (!isTouchScrolling) stopSlideshow(); // Stop only if NOT scrolling
+    });
+
+    card.addEventListener("touchcancel", stopSlideshow);
+}
+
 
     function setupSearchBar() {
         const searchInput = document.getElementById("search-input");
