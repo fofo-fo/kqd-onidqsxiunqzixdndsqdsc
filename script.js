@@ -293,6 +293,7 @@ function loadVideos(page) {
    function enableImageSlideshow(card, img, images, defaultThumbnail) {
     let currentIndex = 0;
     let interval;
+    let isScrolling = false; // Track if the user is scrolling
 
     function startSlideshow() {
         interval = setInterval(() => {
@@ -312,13 +313,23 @@ function loadVideos(page) {
 
     // Touch Events for Mobile
     card.addEventListener("touchstart", (event) => {
+        isScrolling = false; // Reset scrolling state
         startSlideshow();
-        event.preventDefault(); // Prevent unintended scrolling
     });
 
-    card.addEventListener("touchend", stopSlideshow);
+    card.addEventListener("touchmove", () => {
+        isScrolling = true; // User is scrolling
+    });
+
+    card.addEventListener("touchend", (event) => {
+        if (!isScrolling) {
+            stopSlideshow();
+        }
+    });
+
     card.addEventListener("touchcancel", stopSlideshow);
 }
+
 
 
     function setupSearchBar() {
