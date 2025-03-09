@@ -290,22 +290,36 @@ function loadVideos(page) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function enableImageSlideshow(card, img, images, defaultThumbnail) {
-        let currentIndex = 0;
-        let interval;
+   function enableImageSlideshow(card, img, images, defaultThumbnail) {
+    let currentIndex = 0;
+    let interval;
 
-        card.addEventListener("mouseenter", () => {
-            interval = setInterval(() => {
-                img.src = images[currentIndex];
-                currentIndex = (currentIndex + 1) % images.length;
-            }, 500);
-        });
-
-        card.addEventListener("mouseleave", () => {
-            clearInterval(interval);
-            img.src = defaultThumbnail;
-        });
+    function startSlideshow() {
+        interval = setInterval(() => {
+            img.src = images[currentIndex];
+            currentIndex = (currentIndex + 1) % images.length;
+        }, 500);
     }
+
+    function stopSlideshow() {
+        clearInterval(interval);
+        img.src = defaultThumbnail;
+    }
+
+    // Mouse Events for Desktop
+    card.addEventListener("mouseenter", startSlideshow);
+    card.addEventListener("mouseleave", stopSlideshow);
+
+    // Touch Events for Mobile
+    card.addEventListener("touchstart", (event) => {
+        startSlideshow();
+        event.preventDefault(); // Prevent unintended scrolling
+    });
+
+    card.addEventListener("touchend", stopSlideshow);
+    card.addEventListener("touchcancel", stopSlideshow);
+}
+
 
     function setupSearchBar() {
         const searchInput = document.getElementById("search-input");
