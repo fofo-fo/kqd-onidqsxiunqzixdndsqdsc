@@ -29,6 +29,7 @@ document.querySelectorAll("nav ul li a").forEach(link => {
     });
 });
 //############################# Advertisement 728x90 and 300x50 for mobile in the top of home page - (banner) start #################
+
 // Function to insert ads dynamically
 function insertAd(isMobile) {
     const adContainer = document.getElementById("dynamic-ad");
@@ -45,7 +46,7 @@ function insertAd(isMobile) {
     // Create new <ins> element
     const adIns = document.createElement("ins");
     adIns.className = isMobile ? "eas6a97888e10" : "eas6a97888e2";
-    adIns.setAttribute("data-zoneid", isMobile ? "5558436" : "5558434");
+    adIns.setAttribute("data-zoneid", isMobile ? "5558210" : "5558208");
 
     // Create AdProvider script
     const adProviderScript = document.createElement("script");
@@ -74,7 +75,6 @@ handleAdSwitch();
 
 // Listen for screen size changes
 window.addEventListener("resize", handleAdSwitch);
-
 
 //############################# Advertisement 728x90 and 300x50 for mobile in the top of home page - (banner) end #################
    // Pagination Container
