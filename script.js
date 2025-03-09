@@ -293,19 +293,42 @@ function loadVideos(page) {
    function enableImageSlideshow(card, img, images, defaultThumbnail) {
     let currentIndex = 0;
     let interval;
-    let isScrolling = false; // Track if the user is scrolling
 
     function startSlideshow() {
+        // Stop any active slideshows before starting a new one
+        stopAllSlideshows();
+
         interval = setInterval(() => {
             img.src = images[currentIndex];
             currentIndex = (currentIndex + 1) % images.length;
         }, 500);
+
+        // Store active interval in the card element (to clear later)
+        card.dataset.slideshowActive = "true";
+        card.dataset.intervalId = interval;
     }
 
     function stopSlideshow() {
         clearInterval(interval);
         img.src = defaultThumbnail;
+        card.dataset.slideshowActive = "false";
     }
+
+    function stopAllSlideshows() {
+        document.querySelectorAll(".video-card").forEach((otherCard) => {
+            if (otherCard.dataset.slideshowActive === "true") {
+                clearInterval(otherCard.dataset.intervalId);
+                const imgElement = otherCard.querySelector("img");
+                if (imgElement) {
+                    imgElement.src = imgElement.dataset.defaultThumbnail;
+                }
+                otherCard.dataset.slideshowActive = "false";
+            }
+        });
+    }
+
+    // Store the default thumbnail
+    img.dataset.defaultThumbnail = img.src;
 
     // Mouse Events for Desktop
     card.addEventListener("mouseenter", startSlideshow);
@@ -313,22 +336,14 @@ function loadVideos(page) {
 
     // Touch Events for Mobile
     card.addEventListener("touchstart", (event) => {
-        isScrolling = false; // Reset scrolling state
+        event.preventDefault(); // Prevent unintended scrolling
         startSlideshow();
     });
 
-    card.addEventListener("touchmove", () => {
-        isScrolling = true; // User is scrolling
-    });
-
-    card.addEventListener("touchend", (event) => {
-        if (!isScrolling) {
-            stopSlideshow();
-        }
-    });
-
+    card.addEventListener("touchend", stopSlideshow);
     card.addEventListener("touchcancel", stopSlideshow);
 }
+
 
 
 
