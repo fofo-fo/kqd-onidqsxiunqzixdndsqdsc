@@ -29,6 +29,51 @@ document.querySelectorAll("nav ul li a").forEach(link => {
     });
 });
 //############################# Advertisement 728x90 and 300x50 for mobile in the top of home page - (banner) start #################
+// Function to insert ads dynamically
+function insertAd(isMobile) {
+    const adContainer = document.getElementById("dynamic-ad");
+
+    // Clear existing ad content
+    adContainer.innerHTML = "";
+
+    // Create ad script
+    const adScript = document.createElement("script");
+    adScript.async = true;
+    adScript.type = "application/javascript";
+    adScript.src = "https://a.magsrv.com/ad-provider.js";
+
+    // Create new <ins> element
+    const adIns = document.createElement("ins");
+    adIns.className = isMobile ? "eas6a97888e10" : "eas6a97888e2";
+    adIns.setAttribute("data-zoneid", isMobile ? "5558436" : "5558434");
+
+    // Create AdProvider script
+    const adProviderScript = document.createElement("script");
+    adProviderScript.textContent = "(AdProvider = window.AdProvider || []).push({'serve': {}});";
+
+    // Append elements to ad container
+    adContainer.appendChild(adScript);
+    adContainer.appendChild(adIns);
+    adContainer.appendChild(adProviderScript);
+}
+
+// Function to handle ad switching based on screen width
+function handleAdSwitch() {
+    const isMobile = window.matchMedia("(max-width: 448px)").matches;
+    insertAd(isMobile);
+}
+
+// Create the ad container
+const adContainer1 = document.createElement("div");
+adContainer1.id = "dynamic-ad";
+adContainer1.classList.add("ad-space");
+mainContainer.insertBefore(adContainer1, videoGrid);
+
+// Initial ad setup
+handleAdSwitch();
+
+// Listen for screen size changes
+window.addEventListener("resize", handleAdSwitch);
 
 
 //############################# Advertisement 728x90 and 300x50 for mobile in the top of home page - (banner) end #################
