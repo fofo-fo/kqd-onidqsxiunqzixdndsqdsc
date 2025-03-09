@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Grid</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="player.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Flavors&family=Honk&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html">  <!-- Change "index.html" to your main page URL -->
+                <img src="Picture1.png" alt="Logo" class="logo-img">
+                <span class="sexhd">sexHD</span>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Popular Porn</a></li>
+                <li><a href="#">Best Porn</a></li>
+                <li><a href="#">Live Stream</a></li>
+                <li><a href="#">Best Models</a></li>
+                <li><a href="#">Search Porn</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search for videos...">
+<button id="search-button">Search</button>
+
+        </div>
+    </header>
+    <div id="video-container">
+        <div class="video-element">   
+            <h1 id="video-title"></h1>
+            <video id="video-player" controls>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    
+        <div id="ad-space">
+            <div class="ad-box">Ad Space 160x600</div>
+        </div>
+    </div>
+    
+
+    <!-- Views and Likes Container -->
+    <div id="video-stats" >
+        <span class="views"><i class="fa-solid fa-eye"></i> <span id="views-count">0</span></span> 
+        <span class="likes"><i class="fa-solid fa-heart"></i> <span id="likes-count">0</span></span>
+    </div>
+    <p id="video-description"></p>
+    <!-- Ad Container -->
+    <video id="ad-player" style="display:none;" controls>
+        <source src="" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+    
+    
+    <main>
+        <section id="video-grid"></section>
+    </main>
+    
+    <script src="player.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vast-client@3.0.0/dist/vast-client.min.js"></script>
+</body>
+</html>

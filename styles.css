@@ -1,0 +1,458 @@
+/* Make sure to import the "Flavors" font family */
+@import url('https://fonts.googleapis.com/css2?family=Flavors&display=swap');
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #151515; /* Changed background color */
+    color: white;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ff539ac0; /* Changed background color */
+    border-bottom: 2px solid #393939; /* Added border color */
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 10px; /* Set the width of the image */
+    height: auto;
+    margin-right: 10px;
+}
+
+.sexhd {
+    font-family: "Honk", system-ui;
+    font-size: 45px; /* Adjust font size to match your design */
+    color: white;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background-color: #ff00aa; /* Bright background color on hover */
+    padding: 5px 2px; /* Adding some padding for better visual effect */
+    border-radius: 5px; /* Optional: rounding the corners for a smoother look */
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #444;
+    border-radius: 5px;
+    padding: 5px;
+    gap: 10px;
+}
+
+.search-container input {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 8px;
+    width: 250px;
+    border-radius: 4px;
+}
+
+.search-container button {
+    background: #ff539ac0;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.search-container button:hover {
+    background: #ff00aa;
+}
+
+#ad-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ad-space {
+    width: 728px;
+    height: 90px;
+    background: #444;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+}
+
+.video-card {
+    position: relative;
+    background: #222222; /* Changed background color */
+    padding-bottom: 10px;
+    border-radius: 2px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for smooth effect */
+}
+
+.video-card:hover {
+    transform: scale(1.005); /* Slight zoom effect on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Adds shadow for hover effect */
+}
+
+
+.video-title {
+    padding: 5px 5px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.video-thumbnail {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.video-thumbnail img {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+    loading: lazy;
+}
+
+.video-duration {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 3px 7px;
+    font-size: 14px;
+    border-radius: 3px;
+    color: white;
+}
+
+.video-stats {
+    position: absolute;
+    bottom: 1px;
+    right: 10px;
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #b0b0b0;
+}
+
+.ad-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #444;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+#pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.pagination-btn {
+    background: #222222; /* Changed background color */
+    color: white;
+    border: 2px ; /* Added border color */
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pagination-btn:hover {
+    background: #444;
+}
+
+.pagination-btn.active {
+    background: #ff539ac0;
+    font-weight: bold;
+}
+
+.large-ad {
+    width: 900px;
+    height: 250px;
+    background: #444;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.site-description {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #222222; /* Changed background color */
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    border: 2px solid #393939; /* Added border color */
+}
+
+.site-description h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.footer-links a:hover {
+    background-color: #ff00aa; /* Bright background color on hover */
+    padding: 5px 10px; /* Adding some padding for better visual effect */
+    border-radius: 5px; /* Optional: rounding the corners for a smoother look */
+}
+footer {
+    background: #470e26c0; /* Changed background color */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 50px;
+    border-top: 2px solid #393939; /* Added border color */
+}
+
+/* Media Queries */
+
+/* Tablets & Small Laptops */
+@media (max-width: 1199px) {
+    header {
+        padding: 8px 15px;
+    }
+
+    .sexhd {
+        font-size: 30px;
+    }
+
+    .search-container input {
+        width: 180px;
+    }
+
+    #video-grid {
+        grid-template-columns: repeat(2, minmax(200px, 1fr));
+        gap: 10px;
+    }
+
+    .video-title {
+        font-size: 14px;
+    }
+}
+
+/* Tablets & Medium Screens */
+@media (max-width: 991px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .search-container {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .search-container input {
+        width: 100%;
+        max-width: 220px;
+    }
+
+    #video-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .video-card {
+        padding-bottom: 8px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+/* Mobile Screens */
+@media (max-width: 767px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .search-container {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .search-container input {
+        width: 100%;
+        max-width: 220px;
+    }
+
+    #video-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding-left: Opx;
+        width: 100%;
+    }
+
+    .video-card {
+        padding-bottom: 8px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+@media (max-width: 448px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+        margin-right: -19px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    nav ul li {
+        display: block;
+        text-align: center;
+    }
+
+    #video-grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        
+    }
+
+    .video-card, .ad-card {
+        padding-bottom: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 280px; /* Ensure all cards (videos + ads) have the same height */
+        margin-right: -7px;
+    }
+
+    .video-title {
+        padding: 5px 5px;
+        font-size: 16px;
+        text-align: center;
+        min-height: 40px; /* Ensures consistent spacing */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -10px;
+    }
+
+    .video-stats {
+        position: relative;
+        bottom: 0;
+        padding-bottom: 0px; /* Space between title and stats */
+        
+        justify-content: flex-end;
+
+    }
+    #ad-container {
+        display: flex;
+        flex-direction: column; /* Stack ads vertically */
+        align-items: center; /* Center ads */
+        width: 100%;
+        gap: 10px; /* Add spacing between ads */
+    }
+
+    .ad-space {
+        width: 100%; /* Make ads take full width */
+        max-width: 300px; /* Prevent them from being too wide */
+        height: 90px; /* Keep the height */
+    }
+
+    .large-ad {
+        width: 100%; /* Make it responsive */
+        max-width: 320px; /* Ensure it fits within the screen */
+        height: 150px; /* Adjust height to maintain proportions */
+        font-size: 16px; /* Reduce text size for readability */
+    }
+    .ad-card {
+        background: #444;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    footer {
+        margin-right: -19px;
+    }
+    .site-description {
+        margin-right: -10px;
+        margin-left: 10px;
+    }
+
+}
