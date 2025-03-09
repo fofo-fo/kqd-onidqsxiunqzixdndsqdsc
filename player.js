@@ -142,17 +142,20 @@ document.querySelectorAll("nav ul li a").forEach(link => {
     mainContainer.insertBefore(largeAdContainer, paginationContainer);
 
     // Footer
-    const footer = document.createElement("footer");
-    footer.innerHTML = `
-        <div class="footer-links">
-            <a href="#">About Us</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Contact</a>
-        </div>
-        <p>&copy; ${new Date().getFullYear()} PornoHD.Porn - All Rights Reserved</p>
-    `;
-    document.body.appendChild(footer);
+const footer = document.createElement("footer");
+footer.innerHTML = `
+    <div class="footer-links">
+        <a href="#">About Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+        <a href="/2257.html">2257 Compliance</a>
+    </div>
+    <p><strong>18 USC 2257 Compliance Statement:</strong> All models appearing on this website were 18 or older at the time of production. Click <a href="/2257.html">here</a> for more details.</p>
+    <p>&copy; ${new Date().getFullYear()} PornoHD.Porn - All Rights Reserved</p>
+`;
+document.body.appendChild(footer);
+
 
     // Search Bar Handling
     setupSearchBar();
