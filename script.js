@@ -77,11 +77,7 @@ handleAdSwitch();
 window.addEventListener("resize", handleAdSwitch);
 
 //############################# Advertisement 728x90 and 300x50 for mobile in the top of home page - (banner) end #################
- 
-    // Insert Ad Spaces
-    const adContainer1 = createAdContainer("Advertisement 728x90");
-    mainContainer.insertBefore(adContainer1, videoGrid);
-    // Pagination Container
+   // Pagination Container
     const paginationContainer = document.createElement("div");
     paginationContainer.id = "pagination";
     mainContainer.appendChild(paginationContainer);
@@ -129,67 +125,95 @@ window.addEventListener("resize", handleAdSwitch);
         .catch(error => console.error("Error loading JSON:", error));
 
     // Load Videos Function
-    function loadVideos(page) {
-        videoGrid.innerHTML = "";
-        let startIndex = (page - 1) * videosPerPage;
-        let endIndex = Math.min(startIndex + videosPerPage, filteredData.length);
-        let videoCount = 0;
+   // Load Videos Function
+function loadVideos(page) {
+    videoGrid.innerHTML = "";
+    let startIndex = (page - 1) * videosPerPage;
+    let endIndex = Math.min(startIndex + videosPerPage, filteredData.length);
+    let videoCount = 0;
+    let adInjected = false; // Ensure script is added only once
 
-        for (let i = 0; i < totalCardsPerPage; i++) {
-            const card = document.createElement("div");
+    for (let i = 0; i < totalCardsPerPage; i++) {
+        const card = document.createElement("div");
 
-            if ([3, 17, 42].includes(i)) {
-                card.classList.add("video-card", "ad-card");
-                card.textContent = "Ad Space";
-            } else if (videoCount < endIndex - startIndex) {
-                const article = filteredData[startIndex + videoCount];
-                card.classList.add("video-card");
+        // Ad Cards: positions 3, 17, 42
+        if ([3, 17, 42].includes(i)) {
+            card.classList.add("video-card", "ad-card");
 
-                const thumbnailContainer = document.createElement("div");
-                thumbnailContainer.classList.add("video-thumbnail");
+            let adZoneId;
+            if (i === 3) adZoneId = "5558196";
+            else if (i === 17) adZoneId = "5558198";
+            else if (i === 42) adZoneId = "5558200";
 
-                const img = document.createElement("img");
-                img.src = article.thumbnail;
-                img.alt = article.title;
-                img.loading = "lazy";
+            const adIns = document.createElement("ins");
+            adIns.className = "eas6a97888e2";
+            adIns.setAttribute("data-zoneid", adZoneId);
 
-                const duration = document.createElement("div");
-                duration.classList.add("video-duration");
-                duration.textContent = article.duration;
+            card.appendChild(adIns);
+            videoGrid.appendChild(card);
 
-                thumbnailContainer.appendChild(img);
-                thumbnailContainer.appendChild(duration);
-
-                const title = document.createElement("div");
-                title.classList.add("video-title");
-                title.textContent = article.title;
-
-                // Load or generate views & likes
-                const videoStats = getVideoStats(article.id);
-                const stats = document.createElement("div");
-                stats.classList.add("video-stats");
-                stats.innerHTML = `
-                    <span class="views"><i class="fa-solid fa-eye"></i> ${videoStats.views.toLocaleString()}</span> 
-                    <span class="likes"><i class="fa-solid fa-heart"></i> ${videoStats.likes.toLocaleString()}</span>
-                `;
-                // Redirect to player.html with videoId
-                card.addEventListener("click", () => {
-                    window.location.href = `player.html?videoId=${article.id}`;
-                });
-                
-                card.appendChild(thumbnailContainer);
-                card.appendChild(title);
-                card.appendChild(stats);
-
-                enableImageSlideshow(card, img, article.images, article.thumbnail);
-
-                videoCount++;
+            // Ensure script is loaded only once
+            if (!adInjected) {
+                const adScript = document.createElement("script");
+                adScript.async = true;
+                adScript.src = "https://a.magsrv.com/ad-provider.js";
+                document.body.appendChild(adScript);
+                adInjected = true; // Prevent multiple injections
             }
-            
 
+            // Delay loading ads slightly to allow rendering
+            setTimeout(() => {
+                if (window.AdProvider) {
+                    window.AdProvider.push({ serve: {} });
+                }
+            }, 1000);
+        } else if (videoCount < endIndex - startIndex) {
+            const article = filteredData[startIndex + videoCount];
+            card.classList.add("video-card");
+
+            const thumbnailContainer = document.createElement("div");
+            thumbnailContainer.classList.add("video-thumbnail");
+
+            const img = document.createElement("img");
+            img.src = article.thumbnail;
+            img.alt = article.title;
+            img.loading = "lazy";
+
+            const duration = document.createElement("div");
+            duration.classList.add("video-duration");
+            duration.textContent = article.duration;
+
+            thumbnailContainer.appendChild(img);
+            thumbnailContainer.appendChild(duration);
+
+            const title = document.createElement("div");
+            title.classList.add("video-title");
+            title.textContent = article.title;
+
+            const videoStats = getVideoStats(article.id);
+            const stats = document.createElement("div");
+            stats.classList.add("video-stats");
+            stats.innerHTML = `
+                <span class="views"><i class="fa-solid fa-eye"></i> ${videoStats.views.toLocaleString()}</span> 
+                <span class="likes"><i class="fa-solid fa-heart"></i> ${videoStats.likes.toLocaleString()}</span>
+            `;
+
+            card.addEventListener("click", () => {
+                window.location.href = `player.html?videoId=${article.id}`;
+            });
+
+            card.appendChild(thumbnailContainer);
+            card.appendChild(title);
+            card.appendChild(stats);
+
+            enableImageSlideshow(card, img, article.images, article.thumbnail);
+
+            videoCount++;
             videoGrid.appendChild(card);
         }
     }
+}
+
 
     // Pagination System (Scrolls to Top on Click)
     function createPagination() {
