@@ -218,7 +218,7 @@ document.body.appendChild(footer);
             createPagination();
         })
         .catch(error => console.error("Error loading JSON:", error));
-
+//############################# the three Ad cards  start #################
     // Load Videos Function
    function loadVideos(page) {
     videoGrid.innerHTML = ""; // Clear the video grid
@@ -344,6 +344,7 @@ document.body.appendChild(footer);
         }
     }
 }
+//############################# the three Ad cards  end #################
     // Pagination System (Scrolls to Top on Click)
     function createPagination() {
         paginationContainer.innerHTML = "";
