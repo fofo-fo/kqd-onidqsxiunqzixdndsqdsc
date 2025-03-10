@@ -220,68 +220,130 @@ document.body.appendChild(footer);
         .catch(error => console.error("Error loading JSON:", error));
 
     // Load Videos Function
-    function loadVideos(page) {
-        videoGrid.innerHTML = "";
-        let startIndex = (page - 1) * videosPerPage;
-        let endIndex = Math.min(startIndex + videosPerPage, filteredData.length);
-        let videoCount = 0;
+   function loadVideos(page) {
+    videoGrid.innerHTML = ""; // Clear the video grid
+    let startIndex = (page - 1) * videosPerPage;
+    let endIndex = Math.min(startIndex + videosPerPage, filteredData.length);
+    let videoCount = 0;
 
-        for (let i = 0; i < totalCardsPerPage; i++) {
-            const card = document.createElement("div");
+    for (let i = 0; i < totalCardsPerPage; i++) {
+        const card = document.createElement("div");
 
-            if ([3, 17, 42].includes(i)) {
-                card.classList.add("video-card", "ad-card");
-                card.textContent = "Ad Space";
-            } else if (videoCount < endIndex - startIndex) {
-                const article = filteredData[startIndex + videoCount];
-                card.classList.add("video-card");
+        // Check if the current index is an ad position
+        if (i === 3 || i === 17 || i === 42) {
+            card.classList.add("video-card", "ad-card");
 
-                const thumbnailContainer = document.createElement("div");
-                thumbnailContainer.classList.add("video-thumbnail");
+            if (i === 3) {
+                // First ad: magsrv.com with zoneid 5558480
+                const adScript1 = document.createElement("script");
+                adScript1.async = true;
+                adScript1.type = "application/javascript";
+                adScript1.src = "https://a.magsrv.com/ad-provider.js";
 
-                const img = document.createElement("img");
-                img.src = article.thumbnail;
-                img.alt = article.title;
-                img.loading = "lazy";
+                const adIns1 = document.createElement("ins");
+                adIns1.className = "eas6a97888e2";
+                adIns1.setAttribute("data-zoneid", "5558480");
 
-                const duration = document.createElement("div");
-                duration.classList.add("video-duration");
-                duration.textContent = article.duration;
+                const adInitScript1 = document.createElement("script");
+                adInitScript1.textContent = `(AdProvider = window.AdProvider || []).push({"serve": {}});`;
 
-                thumbnailContainer.appendChild(img);
-                thumbnailContainer.appendChild(duration);
+                card.appendChild(adScript1);
+                card.appendChild(adIns1);
+                card.appendChild(adInitScript1);
+            } else if (i === 17) {
+                // Second ad: magsrv.com with zoneid 5558494
+                const adScript2 = document.createElement("script");
+                adScript2.async = true;
+                adScript2.type = "application/javascript";
+                adScript2.src = "https://a.magsrv.com/ad-provider.js";
 
-                const title = document.createElement("div");
-                title.classList.add("video-title");
-                title.textContent = article.title;
+                const adIns2 = document.createElement("ins");
+                adIns2.className = "eas6a97888e2";
+                adIns2.setAttribute("data-zoneid", "5558494");
 
-                // Load or generate views & likes
-                const videoStats = getVideoStats(article.id);
-                const stats = document.createElement("div");
-                stats.classList.add("video-stats");
-                stats.innerHTML = `
-                    <span class="views"><i class="fa-solid fa-eye"></i> ${videoStats.views.toLocaleString()}</span> 
-                    <span class="likes"><i class="fa-solid fa-heart"></i> ${videoStats.likes.toLocaleString()}</span>
-                `;
-                // Redirect to player.html with videoId
-                card.addEventListener("click", () => {
-                    window.location.href = `player.html?videoId=${article.id}`;
-                });
-                
-                card.appendChild(thumbnailContainer);
-                card.appendChild(title);
-                card.appendChild(stats);
+                const adInitScript2 = document.createElement("script");
+                adInitScript2.textContent = `(AdProvider = window.AdProvider || []).push({"serve": {}});`;
 
-                enableImageSlideshow(card, img, article.images, article.thumbnail);
+                card.appendChild(adScript2);
+                card.appendChild(adIns2);
+                card.appendChild(adInitScript2);
+            } else if (i === 42) {
+                // Third ad: magsrv.com with zoneid 5558484
+                const adScript3 = document.createElement("script");
+                adScript3.async = true;
+                adScript3.type = "application/javascript";
+                adScript3.src = "https://a.magsrv.com/ad-provider.js";
 
-                videoCount++;
+                const adIns3 = document.createElement("ins");
+                adIns3.className = "eas6a97888e2";
+                adIns3.setAttribute("data-zoneid", "5558484");
+
+                const adInitScript3 = document.createElement("script");
+                adInitScript3.textContent = `(AdProvider = window.AdProvider || []).push({"serve": {}});`;
+
+                card.appendChild(adScript3);
+                card.appendChild(adIns3);
+                card.appendChild(adInitScript3);
             }
-            
 
+            videoGrid.appendChild(card);
+        } else if (videoCount < endIndex - startIndex) {
+            // Load a video card
+            const article = filteredData[startIndex + videoCount];
+            card.classList.add("video-card");
+
+            // Create thumbnail container
+            const thumbnailContainer = document.createElement("div");
+            thumbnailContainer.classList.add("video-thumbnail");
+
+            // Create and configure the thumbnail image
+            const img = document.createElement("img");
+            img.src = article.thumbnail;
+            img.alt = article.title;
+            img.loading = "lazy";
+
+            // Create and configure the video duration
+            const duration = document.createElement("div");
+            duration.classList.add("video-duration");
+            duration.textContent = article.duration;
+
+            // Append the image and duration to the thumbnail container
+            thumbnailContainer.appendChild(img);
+            thumbnailContainer.appendChild(duration);
+
+            // Create and configure the video title
+            const title = document.createElement("div");
+            title.classList.add("video-title");
+            title.textContent = article.title;
+
+            // Fetch and display video stats
+            const videoStats = getVideoStats(article.id);
+            const stats = document.createElement("div");
+            stats.classList.add("video-stats");
+            stats.innerHTML = `
+                <span class="views"><i class="fa-solid fa-eye"></i> ${videoStats.views.toLocaleString()}</span> 
+                <span class="likes"><i class="fa-solid fa-heart"></i> ${videoStats.likes.toLocaleString()}</span>
+            `;
+
+            // Add click event to navigate to the video player
+            card.addEventListener("click", () => {
+                window.location.href = `player.html?videoId=${article.id}`;
+            });
+
+            // Append all elements to the card
+            card.appendChild(thumbnailContainer);
+            card.appendChild(title);
+            card.appendChild(stats);
+
+            // Enable image slideshow (if applicable)
+            enableImageSlideshow(card, img, article.images, article.thumbnail);
+
+            // Increment the video count and append the card to the grid
+            videoCount++;
             videoGrid.appendChild(card);
         }
     }
-
+}
     // Pagination System (Scrolls to Top on Click)
     function createPagination() {
         paginationContainer.innerHTML = "";
