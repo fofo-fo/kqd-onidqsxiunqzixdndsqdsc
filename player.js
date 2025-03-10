@@ -183,9 +183,54 @@ window.addEventListener("resize", handleAdSwitch);
     `;
     mainContainer.appendChild(descriptionContainer);
 
-    // Large Ad Space (900x250)
-    const largeAdContainer = createAdContainer("Advertisement 900x250", "large-ad");
-    mainContainer.insertBefore(largeAdContainer, paginationContainer);
+    //######################################     Large Ad Space (900x250)  start ###################################################################
+    
+    // Function to insert large ad dynamically
+function insertLargeAd(isMobile) {
+    const largeAdContainer = document.getElementById("dynamic-large-ad");
+
+    // Clear existing ad content
+    largeAdContainer.innerHTML = "";
+
+    // Create ad script
+    const adScript = document.createElement("script");
+    adScript.async = true;
+    adScript.type = "application/javascript";
+    adScript.src = "https://a.magsrv.com/ad-provider.js";
+
+    // Create new <ins> element
+    const adIns = document.createElement("ins");
+    adIns.className = isMobile ? "eas6a97888e10" : "eas6a97888e2";
+    adIns.setAttribute("data-zoneid", isMobile ? "5558506" : "5558504");
+
+    // Create AdProvider script
+    const adProviderScript = document.createElement("script");
+    adProviderScript.textContent = "(AdProvider = window.AdProvider || []).push({'serve': {}});";
+
+    // Append elements to ad container
+    largeAdContainer.appendChild(adScript);
+    largeAdContainer.appendChild(adIns);
+    largeAdContainer.appendChild(adProviderScript);
+}
+
+// Function to handle large ad switching based on screen width
+function handleLargeAdSwitch() {
+    const isMobile = window.matchMedia("(max-width: 448px)").matches;
+    insertLargeAd(isMobile);
+}
+
+// Create the large ad container
+const largeAdContainer = document.createElement("div");
+largeAdContainer.id = "dynamic-large-ad";
+largeAdContainer.classList.add("large-ad");
+mainContainer.insertBefore(largeAdContainer, paginationContainer);
+
+// Initial large ad setup
+handleLargeAdSwitch();
+
+// Listen for screen size changes
+window.addEventListener("resize", handleLargeAdSwitch);
+//#############################################   Large Ad Space (900x250)   end   ######################################################
 
     // Footer
 const footer = document.createElement("footer");
