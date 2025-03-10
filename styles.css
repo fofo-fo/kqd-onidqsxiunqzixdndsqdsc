@@ -93,6 +93,7 @@ nav ul li a:hover {
 .ad-space {
     width: 728px;
     height: 90px;
+    background: #444;
     color: white;
     display: flex;
     justify-content: center;
@@ -174,12 +175,6 @@ nav ul li a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #444;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    text-transform: uppercase;
 }
 
 #pagination {
