@@ -3,4 +3,4 @@ Disallow: /admin/
 Disallow: /private/  
 Disallow: /temp/  
 
-Sitemap: https://sexhd.vercel.app/sitemap.php
+Sitemap: https://sexhd.vercel.app/sitemap.xml
