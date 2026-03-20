@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 
 INPUT_FILE = "articles.json"
-OUTPUT_FILE = "updated_articles.json"
+OUTPUT_FILE = "articles.json"
 
 # Thread-safe writing
 lock = threading.Lock()
